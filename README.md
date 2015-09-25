@@ -1,2 +1,2 @@
 # Rgb2hex
-Rgb2hex
+RGB to Hex

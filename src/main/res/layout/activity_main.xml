@@ -12,27 +12,33 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:id="@+id/text"
+        android:gravity="center_horizontal"
         android:textSize="22sp"
         />
 
-    <SeekBar
+    <include
         android:id="@+id/color_r"
-        style="@style/ColorSeekBar"
-        />
+        layout="@layout/layout_color_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"/>
 
-    <SeekBar
+    <include
         android:id="@+id/color_g"
-        style="@style/ColorSeekBar"
-        />
+        layout="@layout/layout_color_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"/>
 
-    <SeekBar
+    <include
         android:id="@+id/color_b"
-        style="@style/ColorSeekBar"
-        />
+        layout="@layout/layout_color_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

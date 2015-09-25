@@ -1,4 +1,4 @@
-package com.kaolafm.rgb2hex;
+package com.linjiaxiaohai.rgb2hex;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +9,16 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.linjiaxiaohai.rgb2hex.view.ColorSeekBar;
+
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     private LinearLayout background;
-    private SeekBar seekBarR;
-    private SeekBar seekBarG;
-    private SeekBar seekBarB;
+    private ColorSeekBar seekBarR;
+    private ColorSeekBar seekBarG;
+    private ColorSeekBar seekBarB;
     private TextView colorView;
 
     private int colorR;
@@ -30,13 +32,20 @@ public class MainActivity extends AppCompatActivity {
 
         background = (LinearLayout) findViewById(R.id.background);
         colorView = (TextView) findViewById(R.id.text);
-        seekBarR = (SeekBar) findViewById(R.id.color_r);
-        seekBarG = (SeekBar) findViewById(R.id.color_g);
-        seekBarB = (SeekBar) findViewById(R.id.color_b);
+        seekBarR = (ColorSeekBar) findViewById(R.id.color_r);
+        seekBarG = (ColorSeekBar) findViewById(R.id.color_g);
+        seekBarB = (ColorSeekBar) findViewById(R.id.color_b);
 
+        seekBarR.setHint("R");
+        seekBarG.setHint("G");
+        seekBarB.setHint("B");
         seekBarR.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(0));
         seekBarG.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(1));
         seekBarB.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(2));
+
+        seekBarR.setProgress(10);
+        seekBarG.setProgress(20);
+        seekBarB.setProgress(30);
     }
 
     class ColorSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
@@ -75,7 +84,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void notifyBackground() {
-        String color = String.format(Locale.getDefault(), "%s%s%s", Integer.toHexString(colorR), Integer.toHexString(colorG), Integer.toHexString(colorB));
+        String R, G, B;
+        R = Integer.toHexString(colorR);
+        G = Integer.toHexString(colorG);
+        B = Integer.toHexString(colorB);
+        R = R.length() == 1 ? "0" + R : R;
+        G = G.length() == 1 ? "0" + G : G;
+        B = B.length() == 1 ? "0" + B : B;
+        String color = String.format(Locale.getDefault(), "%s%s%s", R, G, B);
         colorView.setText(color);
         background.setBackgroundColor(Color.rgb(colorR, colorG, colorB));
     }

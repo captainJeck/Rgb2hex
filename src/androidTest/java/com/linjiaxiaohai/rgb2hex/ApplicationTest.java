@@ -1,4 +1,4 @@
-package com.kaolafm.rgb2hex;
+package com.linjiaxiaohai.rgb2hex;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
