@@ -91,9 +91,8 @@ public class MainActivity extends AppCompatActivity {
         R = R.length() == 1 ? "0" + R : R;
         G = G.length() == 1 ? "0" + G : G;
         B = B.length() == 1 ? "0" + B : B;
-        String color = String.format(Locale.getDefault(), "%s%s%s", R, G, B);
-        colorView.setText(color);
-        background.setBackgroundColor(Color.rgb(colorR, colorG, colorB));
+        colorView.setText(String.format(Locale.getDefault(), "%s%s%s", R, G, B).toUpperCase(Locale.getDefault()));
+        colorView.setTextColor(Color.rgb(colorR, colorG, colorB));
     }
 
     @Override
