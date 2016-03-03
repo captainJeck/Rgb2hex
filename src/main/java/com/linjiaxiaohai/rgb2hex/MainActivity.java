@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private ColorSeekBar seekBarG;
     private ColorSeekBar seekBarB;
     private TextView colorView;
+    private TextView colorTextView;
 
     private int colorR;
     private int colorG;
@@ -31,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         background = (LinearLayout) findViewById(R.id.background);
-        colorView = (TextView) findViewById(R.id.text);
+        colorTextView = (TextView) findViewById(R.id.text);
+        colorView = (TextView) findViewById(R.id.color);
         seekBarR = (ColorSeekBar) findViewById(R.id.color_r);
         seekBarG = (ColorSeekBar) findViewById(R.id.color_g);
         seekBarB = (ColorSeekBar) findViewById(R.id.color_b);
@@ -91,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
         R = R.length() == 1 ? "0" + R : R;
         G = G.length() == 1 ? "0" + G : G;
         B = B.length() == 1 ? "0" + B : B;
-        colorView.setText(String.format(Locale.getDefault(), "%s%s%s", R, G, B).toUpperCase(Locale.getDefault()));
-        colorView.setTextColor(Color.rgb(colorR, colorG, colorB));
+        colorTextView.setText(String.format(Locale.getDefault(), "#%s%s%s", R, G, B).toUpperCase(Locale.getDefault()));
+        colorView.setBackgroundColor(Color.rgb(colorR, colorG, colorB));
     }
 
     @Override
