@@ -19,27 +19,30 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
         <TextView
             android:id="@+id/text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="1"
             android:padding="10dp"
             android:textSize="22sp"
             />
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:orientation="vertical"
+            android:gravity="center_vertical"
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
 
@@ -48,7 +51,8 @@
                 layout="@layout/layout_color_seek_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 />
 
             <include
@@ -56,7 +60,8 @@
                 layout="@layout/layout_color_seek_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 />
 
             <include
@@ -64,10 +69,10 @@
                 layout="@layout/layout_color_seek_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 />
         </LinearLayout>
-    </FrameLayout>
-
+    </LinearLayout>
 
 </LinearLayout>

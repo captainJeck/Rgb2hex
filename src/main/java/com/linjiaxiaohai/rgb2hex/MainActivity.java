@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
         seekBarG.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(1));
         seekBarB.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(2));
 
-        seekBarR.setProgress(10);
-        seekBarG.setProgress(20);
-        seekBarB.setProgress(30);
+        seekBarR.setProgress(70);
+        seekBarG.setProgress(80);
+        seekBarB.setProgress(90);
     }
 
     class ColorSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
