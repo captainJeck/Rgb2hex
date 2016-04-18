@@ -1,4 +1,4 @@
-package com.linjiaxiaohai.rgb2hex.view;
+package com.linjiaxiaohai.rgb.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -71,6 +71,10 @@ public class ColorSeekBar extends LinearLayout {
 
     public void setProgress(int progress) {
         mProgress.setProgress(progress);
+    }
+
+    public void setMax(int max) {
+        mProgress.setMax(max);
     }
 
     public SeekBar.OnSeekBarChangeListener getOnSeekBarChangeListener() {

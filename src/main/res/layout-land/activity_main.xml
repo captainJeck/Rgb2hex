@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context="com.linjiaxiaohai.rgb.MainActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -22,8 +22,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1">
 
@@ -51,17 +51,16 @@
                 layout="@layout/layout_color_seek_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/seek_bar_margin_bottom"
-                android:layout_marginTop="@dimen/seek_bar_margin_top"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 />
-
             <include
                 android:id="@+id/color_r"
                 layout="@layout/layout_color_seek_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/seek_bar_margin_bottom"
-                android:layout_marginTop="@dimen/seek_bar_margin_top"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 />
 
             <include
@@ -69,8 +68,8 @@
                 layout="@layout/layout_color_seek_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/seek_bar_margin_bottom"
-                android:layout_marginTop="@dimen/seek_bar_margin_top"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 />
 
             <include
@@ -78,8 +77,8 @@
                 layout="@layout/layout_color_seek_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/seek_bar_margin_bottom"
-                android:layout_marginTop="@dimen/seek_bar_margin_top"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 />
         </LinearLayout>
     </LinearLayout>
