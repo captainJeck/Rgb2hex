@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         public void onProgressChanged(SeekBar bar, int i, boolean b) {
             switch (color) {
                 case 0:
-                    colorA = i;
+                    colorA = (int)Math.ceil(i*2.55);
                     break;
                 case 1:
                     colorR = i;
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void notifyBackground() {
         String A, R, G, B;
-        A = Integer.toHexString((int)Math.ceil(colorA*2.55));
+        A = Integer.toHexString(colorA);
         R = Integer.toHexString(colorR);
         G = Integer.toHexString(colorG);
         B = Integer.toHexString(colorB);
