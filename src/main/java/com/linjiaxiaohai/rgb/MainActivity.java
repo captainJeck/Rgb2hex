@@ -1,22 +1,17 @@
 package com.linjiaxiaohai.rgb;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.linjiaxiaohai.rgb.view.ColorSeekBar;
 import com.linjiaxiaohai.rgb2hex.R;
 
-import java.util.Locale;
+public class MainActivity extends AppCompatActivity implements ColorView{
 
-public class MainActivity extends AppCompatActivity {
-
-    private LinearLayout background;
     private ColorSeekBar seekBarA;
     private ColorSeekBar seekBarR;
     private ColorSeekBar seekBarG;
@@ -24,17 +19,15 @@ public class MainActivity extends AppCompatActivity {
     private TextView colorView;
     private TextView colorTextView;
 
-    private int colorA;
-    private int colorR;
-    private int colorG;
-    private int colorB;
+    private ColorPresenter colorPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        background = (LinearLayout) findViewById(R.id.background);
+        colorPresenter = new ColorPresenter(this);
+
         colorTextView = (TextView) findViewById(R.id.text);
         colorView = (TextView) findViewById(R.id.color);
         seekBarA = (ColorSeekBar) findViewById(R.id.color_a);
@@ -57,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         seekBarR.setProgress(70);
         seekBarG.setProgress(80);
         seekBarB.setProgress(90);
-
     }
+
 
     class ColorSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
 
@@ -72,19 +65,18 @@ public class MainActivity extends AppCompatActivity {
         public void onProgressChanged(SeekBar bar, int i, boolean b) {
             switch (color) {
                 case 0:
-                    colorA = (int)Math.ceil(i*2.55);
+                    colorPresenter.alpha(i);
                     break;
                 case 1:
-                    colorR = i;
+                    colorPresenter.red(i);
                     break;
                 case 2:
-                    colorG = i;
+                    colorPresenter.green(i);
                     break;
                 case 3:
-                    colorB = i;
+                    colorPresenter.blue(i);
                     break;
             }
-            notifyBackground();
         }
 
         @Override
@@ -98,18 +90,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void notifyBackground() {
-        String A, R, G, B;
-        A = Integer.toHexString(colorA);
-        R = Integer.toHexString(colorR);
-        G = Integer.toHexString(colorG);
-        B = Integer.toHexString(colorB);
-        A = A.length() == 1 ? "0" + A : A;
-        R = R.length() == 1 ? "0" + R : R;
-        G = G.length() == 1 ? "0" + G : G;
-        B = B.length() == 1 ? "0" + B : B;
-        colorTextView.setText(String.format(Locale.getDefault(), "#%s%s%s%s", A, R, G, B).toUpperCase(Locale.getDefault()));
-        colorView.setBackgroundColor(Color.argb(colorA, colorR, colorG, colorB));
+    @Override
+    public void colorChanged(int color, String hexColor) {
+        colorTextView.setText(hexColor);
+        colorView.setBackgroundColor(color);
     }
 
     @Override
@@ -127,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_feedback) {
             return true;
         }
 

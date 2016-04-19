@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">RGB2hex</string>
+    <string name="app_name">颜色转换</string>
+    <string name="action_feedback">反馈</string>
+    <string name="action_donate">捐赠</string>
+    <string name="action_about">关于</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
