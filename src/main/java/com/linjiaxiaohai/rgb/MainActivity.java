@@ -1,6 +1,8 @@
 package com.linjiaxiaohai.rgb;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +30,15 @@ public class MainActivity extends AppCompatActivity implements ColorView{
 
         colorPresenter = new ColorPresenter(this);
 
+        initView();
+
+        seekBarA.setProgress(100);
+        seekBarR.setProgress(70);
+        seekBarG.setProgress(80);
+        seekBarB.setProgress(90);
+    }
+
+    private void initView() {
         colorTextView = (TextView) findViewById(R.id.text);
         colorView = (TextView) findViewById(R.id.color);
         seekBarA = (ColorSeekBar) findViewById(R.id.color_a);
@@ -45,13 +56,7 @@ public class MainActivity extends AppCompatActivity implements ColorView{
         seekBarR.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(1));
         seekBarG.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(2));
         seekBarB.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(3));
-
-        seekBarA.setProgress(100);
-        seekBarR.setProgress(70);
-        seekBarG.setProgress(80);
-        seekBarB.setProgress(90);
     }
-
 
     class ColorSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
 
@@ -94,6 +99,22 @@ public class MainActivity extends AppCompatActivity implements ColorView{
     public void colorChanged(int color, String hexColor) {
         colorTextView.setText(hexColor);
         colorView.setBackgroundColor(color);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_main);
+        initView();
+        seekBarA.setProgress(colorPresenter.getAlpha());
+        seekBarR.setProgress(colorPresenter.getRed());
+        seekBarG.setProgress(colorPresenter.getGreen());
+        seekBarB.setProgress(colorPresenter.getBlue());
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
     }
 
     @Override
