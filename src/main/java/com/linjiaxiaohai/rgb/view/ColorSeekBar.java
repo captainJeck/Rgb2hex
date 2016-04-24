@@ -6,7 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.linjiaxiaohai.rgb2hex.R;
+import com.linjiaxiaohai.rgb.R;
 
 /**
  * Created by mengxn on 15-9-25.

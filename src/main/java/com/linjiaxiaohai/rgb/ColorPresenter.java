@@ -24,7 +24,13 @@ public class ColorPresenter {
     }
 
 
+    /**
+     * 设置透明度
+     * @param alpha 0 ～ 100%
+     */
     public void alpha(int alpha) {
+        if (alpha < 0) alpha = 0;
+        if (alpha > 100) alpha = 100;
         colorA = (int)Math.ceil(alpha*2.55);
         calculteColor();
     }
@@ -42,6 +48,23 @@ public class ColorPresenter {
     public void blue(int blue) {
         colorB = blue;
         calculteColor();
+    }
+
+    public void color(ColorType type, int color) {
+        switch (type) {
+            case ALPHA:
+                alpha(color);
+                break;
+            case RED:
+                red(color);
+                break;
+            case GREEN:
+                green(color);
+                break;
+            case BLUE:
+                blue(color);
+                break;
+        }
     }
 
     private void calculteColor() {

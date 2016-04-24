@@ -8,7 +8,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.linjiaxiaohai.rgb.view.ColorSeekBar;
-import com.linjiaxiaohai.rgb2hex.R;
+import com.umeng.fb.FeedbackAgent;
 
 public class MainActivity extends AppCompatActivity implements ColorView{
 
@@ -41,10 +41,10 @@ public class MainActivity extends AppCompatActivity implements ColorView{
         seekBarB.setHint("B");
         seekBarA.setMax(100);
 
-        seekBarA.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(0));
-        seekBarR.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(1));
-        seekBarG.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(2));
-        seekBarB.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(3));
+        seekBarA.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(ColorType.ALPHA));
+        seekBarR.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(ColorType.RED));
+        seekBarG.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(ColorType.GREEN));
+        seekBarB.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(ColorType.BLUE));
 
         seekBarA.setProgress(100);
         seekBarR.setProgress(70);
@@ -55,28 +55,15 @@ public class MainActivity extends AppCompatActivity implements ColorView{
 
     class ColorSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
 
-        private int color;
+        private ColorType type;
 
-        public ColorSeekBarChangeListener(int color) {
-            this.color = color;
+        public ColorSeekBarChangeListener(ColorType type) {
+            this.type = type;
         }
 
         @Override
         public void onProgressChanged(SeekBar bar, int i, boolean b) {
-            switch (color) {
-                case 0:
-                    colorPresenter.alpha(i);
-                    break;
-                case 1:
-                    colorPresenter.red(i);
-                    break;
-                case 2:
-                    colorPresenter.green(i);
-                    break;
-                case 3:
-                    colorPresenter.blue(i);
-                    break;
-            }
+            colorPresenter.color(type, i);
         }
 
         @Override
@@ -98,25 +85,26 @@ public class MainActivity extends AppCompatActivity implements ColorView{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_feedback) {
-            return true;
+        switch (id) {
+            case R.id.action_feedback:
+                openFeedback();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-
+    private void openFeedback() {
+        FeedbackAgent agent = new FeedbackAgent(this);
+        agent.setWelcomeInfo("hello");
+        agent.startFeedbackActivity();
+    }
 }
