@@ -1,7 +1,6 @@
 package com.linjiaxiaohai.rgb.utils;
 
 import android.graphics.Bitmap;
-import android.os.Environment;
 import android.text.TextUtils;
 
 import java.io.File;
@@ -13,11 +12,11 @@ import java.io.IOException;
  */
 public class BitmapUtils {
 
-    public static boolean saveBitmap(Bitmap bitmap, String name) {
-        if (bitmap == null || TextUtils.isEmpty(name)) {
+    public static boolean saveBitmap(Bitmap bitmap, String path) {
+        if (bitmap == null || TextUtils.isEmpty(path)) {
             return false;
         }
-        File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), name);
+        File f = new File(path);
         if (f.exists()) {
             f.delete();
         }

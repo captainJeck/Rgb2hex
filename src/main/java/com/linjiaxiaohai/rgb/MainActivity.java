@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -149,9 +150,9 @@ public class MainActivity extends BaseActivity implements ColorView{
             public boolean onLongClick(View v) {
                 v.buildDrawingCache();
                 Bitmap bitmap = v.getDrawingCache();
-                String name = "qr.png";
-                if (BitmapUtils.saveBitmap(bitmap, name)) {
-                    Toast.makeText(MainActivity.this, name+"已保存到手机", Toast.LENGTH_SHORT).show();
+                String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/qr.png";
+                if (BitmapUtils.saveBitmap(bitmap, path)) {
+                    Toast.makeText(MainActivity.this, "图片已保存到"+path, Toast.LENGTH_LONG).show();
                 }
                 return true;
             }
