@@ -11,10 +11,10 @@ public class ColorPresenter {
 
     private ColorView view;
 
-    private int colorA;
-    private int colorR;
-    private int colorG;
-    private int colorB;
+    private int alpha;
+    private int red;
+    private int green;
+    private int blue;
 
     public ColorPresenter(ColorView view) {
         if (view == null) {
@@ -24,30 +24,40 @@ public class ColorPresenter {
     }
 
 
-    /**
-     * 设置透明度
-     * @param alpha 0 ～ 100%
-     */
     public void alpha(int alpha) {
-        if (alpha < 0) alpha = 0;
-        if (alpha > 100) alpha = 100;
-        colorA = (int)Math.ceil(alpha*2.55);
+        this.alpha = (int)Math.ceil(alpha*2.55);
         calculteColor();
     }
 
     public void red(int red) {
-        colorR = red;
+        this.red = red;
         calculteColor();
     }
 
     public void green(int green) {
-        colorG = green;
+        this.green = green;
         calculteColor();
     }
 
     public void blue(int blue) {
-        colorB = blue;
+        this.blue = blue;
         calculteColor();
+    }
+
+    public int getAlpha() {
+        return alpha;
+    }
+
+    public int getRed() {
+        return red;
+    }
+
+    public int getGreen() {
+        return green;
+    }
+
+    public int getBlue() {
+        return blue;
     }
 
     public void color(ColorType type, int color) {
@@ -69,15 +79,15 @@ public class ColorPresenter {
 
     private void calculteColor() {
         String A, R, G, B;
-        A = Integer.toHexString(colorA);
-        R = Integer.toHexString(colorR);
-        G = Integer.toHexString(colorG);
-        B = Integer.toHexString(colorB);
+        A = Integer.toHexString(alpha);
+        R = Integer.toHexString(red);
+        G = Integer.toHexString(green);
+        B = Integer.toHexString(blue);
         A = A.length() == 1 ? "0" + A : A;
         R = R.length() == 1 ? "0" + R : R;
         G = G.length() == 1 ? "0" + G : G;
         B = B.length() == 1 ? "0" + B : B;
-        int color = Color.argb(colorA, colorR, colorG, colorB);
+        int color = Color.argb(alpha, red, green, blue);
         String hexColor = String.format(Locale.getDefault(), "#%s%s%s%s", A, R, G, B).toUpperCase(Locale.getDefault());
 
         view.colorChanged(color, hexColor);

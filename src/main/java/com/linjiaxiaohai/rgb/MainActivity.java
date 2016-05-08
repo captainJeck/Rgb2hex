@@ -1,16 +1,22 @@
 package com.linjiaxiaohai.rgb;
 
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.linjiaxiaohai.rgb.utils.BitmapUtils;
 import com.linjiaxiaohai.rgb.view.ColorSeekBar;
-import com.umeng.fb.FeedbackAgent;
+import com.umeng.analytics.MobclickAgent;
 
-public class MainActivity extends AppCompatActivity implements ColorView{
+public class MainActivity extends BaseActivity implements ColorView{
 
     private ColorSeekBar seekBarA;
     private ColorSeekBar seekBarR;
@@ -28,6 +34,18 @@ public class MainActivity extends AppCompatActivity implements ColorView{
 
         colorPresenter = new ColorPresenter(this);
 
+        initView();
+
+        //default
+        seekBarA.setProgress(100);
+        seekBarR.setProgress(70);
+        seekBarG.setProgress(80);
+        seekBarB.setProgress(90);
+
+        MobclickAgent.onResume(this);
+    }
+
+    private void initView() {
         colorTextView = (TextView) findViewById(R.id.text);
         colorView = (TextView) findViewById(R.id.color);
         seekBarA = (ColorSeekBar) findViewById(R.id.color_a);
@@ -45,13 +63,7 @@ public class MainActivity extends AppCompatActivity implements ColorView{
         seekBarR.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(ColorType.RED));
         seekBarG.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(ColorType.GREEN));
         seekBarB.setOnSeekBarChangeListener(new ColorSeekBarChangeListener(ColorType.BLUE));
-
-        seekBarA.setProgress(100);
-        seekBarR.setProgress(70);
-        seekBarG.setProgress(80);
-        seekBarB.setProgress(90);
     }
-
 
     class ColorSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
 
@@ -84,6 +96,17 @@ public class MainActivity extends AppCompatActivity implements ColorView{
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_main);
+        initView();
+        seekBarA.setProgress(colorPresenter.getAlpha());
+        seekBarR.setProgress(colorPresenter.getRed());
+        seekBarG.setProgress(colorPresenter.getGreen());
+        seekBarB.setProgress(colorPresenter.getBlue());
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -97,14 +120,54 @@ public class MainActivity extends AppCompatActivity implements ColorView{
             case R.id.action_feedback:
                 openFeedback();
                 return true;
+            case R.id.action_donate:
+                showDonateDialog();
+                break;
+            case R.id.action_about:
+                showAboutDialog();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * 打开反馈页面
+     */
     private void openFeedback() {
-        FeedbackAgent agent = new FeedbackAgent(this);
-        agent.setWelcomeInfo("hello");
-        agent.startFeedbackActivity();
+        startActivity(new Intent(this, FeedbackActivity.class));
     }
+
+    /**
+     * 显示捐赠二维码
+     */
+    private void showDonateDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.dialog_donate, null);
+        view.findViewById(R.id.qr).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                v.buildDrawingCache();
+                Bitmap bitmap = v.getDrawingCache();
+                String name = "qr.png";
+                if (BitmapUtils.saveBitmap(bitmap, name)) {
+                    Toast.makeText(MainActivity.this, name+"已保存到手机", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+        builder.setView(view);
+        builder.setCancelable(true);
+        builder.create().show();
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.app_name);
+        builder.setMessage(R.string.about);
+        builder.setCancelable(true);
+        builder.create().show();
+    }
+
+
 }

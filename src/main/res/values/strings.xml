@@ -1,9 +1,12 @@
 <resources>
+
     <string name="app_name">颜色转换</string>
     <string name="action_feedback">反馈</string>
     <string name="action_donate">捐赠</string>
     <string name="action_about">关于</string>
+    <string name="donate_tip">微(yi)信(fen)二(ye)维(shi)码(ai)</string>
+    <string name="donate_tip_press">(长按保存图片)</string>
+    <string name="feedback">发送</string>
+    <string name="about">非常高兴你使用本产品，能为你带来方便是我最大的荣幸。如有更多需求可反馈给我，会在后续版本添加。</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
 </resources>
