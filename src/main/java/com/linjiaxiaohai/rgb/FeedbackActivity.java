@@ -63,6 +63,7 @@ public class FeedbackActivity extends BaseActivity implements IFeedbackView {
 
     private void feedback() {
         if (validate()) {
+            hideInputMethod();
             feedbackPresenter.feedback(feedbackEdit.getText().toString(), contactsEdit.getText().toString());
         } else {
             Toast.makeText(this, "请填写反馈信息", Toast.LENGTH_SHORT).show();
